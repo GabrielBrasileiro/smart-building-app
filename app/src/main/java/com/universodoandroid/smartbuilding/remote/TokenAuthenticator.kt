@@ -11,7 +11,7 @@ class TokenAuthenticator : Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? {
         val session = SmartBuildingApplication.session
         session?.getToken()?.let {
-            return response.request().newBuilder().header("TokenResponse", it).build()
+            return response.request().newBuilder().header("Token", it).build()
         }
         return null
     }

@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity(), LoginHandler, LoginContract.Activity 
     }
 
     override fun onError(error: String) {
-        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+        print(error)
     }
 
     private fun redirectToMenu() {

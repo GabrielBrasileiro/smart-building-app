@@ -1,10 +1,10 @@
 package com.universodoandroid.smartbuilding.response
 
-data class ApartmentResponse(
+data class Sensor(
     val createdAt: String,
-    val floor: Int,
+    val description: String,
     val id: Int,
-    val number: String,
-    val sensors: List<Sensor>,
+    val name: String,
+    val pivot: Pivot,
     val updatedAt: String
 )

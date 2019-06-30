@@ -1,13 +1,15 @@
 package com.universodoandroid.smartbuilding.module.menu
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
+import com.universodoandroid.smartbuilding.Constants
 import com.universodoandroid.smartbuilding.R
 import com.universodoandroid.smartbuilding.databinding.ActivityMenuBinding
+import com.universodoandroid.smartbuilding.extensions.numberOfColumns
+import com.universodoandroid.smartbuilding.module.menu.dialogs.SensorsDialogFragment
 import com.universodoandroid.smartbuilding.module.menu.dto.ApartmentDto
 import com.universodoandroid.smartbuilding.remote.api.InjectionApiDataSourceMain
 
@@ -26,19 +28,22 @@ class ApartmentActivity : AppCompatActivity(), ApartmentContract.Activity {
 
     override fun showApartments(apartments: List<ApartmentDto>) {
         binding?.apartmentsRecyclerView?.run {
-            layoutManager = GridLayoutManager(applicationContext, numberOfColumns())
-            adapter = ApartmentAdapter(apartments) { apartmentDto ->
-                
+            layoutManager = GridLayoutManager(applicationContext, resources.numberOfColumns())
+            adapter = ApartmentAdapter(apartments) { id ->
+                showControlDialog(id = id)
             }
         }
     }
 
-    private fun numberOfColumns(): Int {
-        return if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            1
-        } else {
-            2
+    private fun showControlDialog(id: Int) {
+        val bundle = Bundle().apply {
+            putString(Constants.APARTMENT_ID_KEY, id.toString())
         }
+
+        val sensorsDialog = SensorsDialogFragment()
+        sensorsDialog.arguments = bundle
+
+        sensorsDialog.show(supportFragmentManager, sensorsDialog.tag)
     }
 
     override fun showError(error: String) {

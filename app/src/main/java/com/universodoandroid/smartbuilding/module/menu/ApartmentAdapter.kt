@@ -9,7 +9,7 @@ import com.universodoandroid.smartbuilding.R
 import com.universodoandroid.smartbuilding.databinding.ApartmentItemBinding
 import com.universodoandroid.smartbuilding.module.menu.dto.ApartmentDto
 
-class ApartmentAdapter(private val apartments: List<ApartmentDto>, private val onClick: (ApartmentDto) -> Unit) :
+class ApartmentAdapter(private val apartments: List<ApartmentDto>, private val onClick: (Int) -> Unit) :
         RecyclerView.Adapter<ApartmentAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,7 +24,7 @@ class ApartmentAdapter(private val apartments: List<ApartmentDto>, private val o
 
             executePendingBindings()
 
-            root.setOnClickListener { onClick(currentApartment) }
+            apartmentFab.setOnClickListener { onClick(currentApartment.id) }
         }
     }
 

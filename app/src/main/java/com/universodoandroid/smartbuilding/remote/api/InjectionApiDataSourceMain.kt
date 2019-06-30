@@ -15,10 +15,6 @@ object InjectionApiDataSourceMain {
         return provideApiDataSource().createService(AuthApiDataSource::class.java)
     }
 
-    fun provideSensorApiDataSource(): ApartmentApiDataSource {
-        return provideApiDataSource().createService(ApartmentApiDataSource::class.java)
-    }
-
     fun provideApartmentApiDataSource(): ApartmentApiDataSource {
         return provideApiDataSource().createService(ApartmentApiDataSource::class.java)
     }
