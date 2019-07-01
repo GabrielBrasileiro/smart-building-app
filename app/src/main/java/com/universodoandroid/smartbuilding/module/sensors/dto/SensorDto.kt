@@ -1,4 +1,4 @@
-package com.universodoandroid.smartbuilding.module.menu.dto
+package com.universodoandroid.smartbuilding.module.sensors.dto
 
 data class SensorDto(
         val id: Int,

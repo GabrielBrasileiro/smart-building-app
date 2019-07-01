@@ -1,4 +1,4 @@
-package com.universodoandroid.smartbuilding.module.menu
+package com.universodoandroid.smartbuilding.module.apartments
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,10 +9,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.universodoandroid.smartbuilding.Constants
 import com.universodoandroid.smartbuilding.R
+import com.universodoandroid.smartbuilding.SmartBuildingApplication
 import com.universodoandroid.smartbuilding.databinding.ActivityMenuBinding
 import com.universodoandroid.smartbuilding.extensions.numberOfColumns
-import com.universodoandroid.smartbuilding.module.menu.dialogs.SensorsActivity
-import com.universodoandroid.smartbuilding.module.menu.dto.ApartmentDto
+import com.universodoandroid.smartbuilding.module.login.LoginActivity
+import com.universodoandroid.smartbuilding.module.sensors.SensorsActivity
+import com.universodoandroid.smartbuilding.module.apartments.dto.ApartmentDto
 import com.universodoandroid.smartbuilding.remote.api.InjectionApiDataSourceMain
 
 class ApartmentActivity : AppCompatActivity(), ApartmentContract.View {
@@ -46,6 +48,7 @@ class ApartmentActivity : AppCompatActivity(), ApartmentContract.View {
 
     override fun showError(error: String) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+        redirectToLogin()
     }
 
     override fun showLoader() {
@@ -54,6 +57,12 @@ class ApartmentActivity : AppCompatActivity(), ApartmentContract.View {
 
     override fun dismissLoader() {
         binding?.progressBar?.visibility = View.GONE
+    }
+
+    private fun redirectToLogin() {
+        startActivity(Intent(this, LoginActivity::class.java))
+        SmartBuildingApplication.session?.deleteStateLogin()
+        finish()
     }
 
 }

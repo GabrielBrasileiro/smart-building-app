@@ -3,7 +3,7 @@ package com.universodoandroid.smartbuilding
 import android.app.Application
 import android.content.Intent
 import com.universodoandroid.smartbuilding.local.Session
-import com.universodoandroid.smartbuilding.module.menu.ApartmentActivity
+import com.universodoandroid.smartbuilding.module.apartments.ApartmentActivity
 
 class SmartBuildingApplication : Application() {
 

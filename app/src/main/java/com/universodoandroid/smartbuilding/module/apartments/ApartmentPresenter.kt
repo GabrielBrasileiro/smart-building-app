@@ -1,7 +1,7 @@
-package com.universodoandroid.smartbuilding.module.menu
+package com.universodoandroid.smartbuilding.module.apartments
 
 import android.annotation.SuppressLint
-import com.universodoandroid.smartbuilding.module.menu.dto.ApartmentDto
+import com.universodoandroid.smartbuilding.module.apartments.dto.ApartmentDto
 import com.universodoandroid.smartbuilding.remote.services.ApartmentApiDataSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

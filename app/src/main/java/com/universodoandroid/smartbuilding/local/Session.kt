@@ -7,7 +7,7 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 
 @SuppressLint("CommitPrefEdits")
-class Session(val context: Context) {
+class Session(private val context: Context) {
 
     private val keyToken = "key_token"
     private val keyPreferencesReference = "session"

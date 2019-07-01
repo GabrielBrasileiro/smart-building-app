@@ -1,5 +1,6 @@
-package com.universodoandroid.smartbuilding.module.menu.dialogs
+package com.universodoandroid.smartbuilding.module.sensors
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -11,12 +12,13 @@ import com.universodoandroid.smartbuilding.R
 import com.universodoandroid.smartbuilding.databinding.SensorsActivityBinding
 import com.universodoandroid.smartbuilding.domain.Sensor
 import com.universodoandroid.smartbuilding.extensions.numberOfColumns
-import com.universodoandroid.smartbuilding.module.menu.dto.SensorDto
+import com.universodoandroid.smartbuilding.module.sensors.dto.SensorDto
 import com.universodoandroid.smartbuilding.remote.api.InjectionApiDataSourceMain
 
 class SensorsActivity : AppCompatActivity(), SensorsContract.View {
 
-    private var binding: SensorsActivityBinding? = null
+    private lateinit var binding: SensorsActivityBinding
+
     private var presenter: SensorsPresenter? = null
     private val apartmentId: Int? by lazy {
         intent.getIntExtra(Constants.APARTMENT_ID_KEY, -1)
@@ -33,12 +35,10 @@ class SensorsActivity : AppCompatActivity(), SensorsContract.View {
 
     private fun setupView() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         title = resources.getString(R.string.control_title)
     }
 
     private fun initRequest() {
-        showProgressBar(View.VISIBLE)
         apartmentId?.let { presenter?.getSensors(apartmentId = it.toString()) }
     }
 
@@ -51,23 +51,28 @@ class SensorsActivity : AppCompatActivity(), SensorsContract.View {
     }
 
     override fun showSensors(sensors: List<SensorDto>) {
-        showProgressBar(View.GONE)
+        setupRecyclerView(sensors)
+    }
 
-        binding?.sensorsRecyclerView?.run {
+    override fun showError(error: String) {
+        println(error)
+    }
+
+    override fun showLoader() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    override fun dismissLoader() {
+        binding.progressBar.visibility = View.GONE
+    }
+
+    private fun setupRecyclerView(sensors: List<SensorDto>) {
+        binding.sensorsRecyclerView.run {
             layoutManager = GridLayoutManager(context, resources.numberOfColumns())
             adapter = SensorsAdapter(sensors) { id, isOn, onComplete, onError ->
                 updateSensor(id, isOn, onComplete, onError)
             }
         }
-    }
-
-    override fun showError(error: String) {
-        showProgressBar(View.GONE)
-        println(error)
-    }
-
-    private fun showProgressBar(visibility: Int) {
-        binding?.progressBar?.visibility = visibility
     }
 
     private fun updateSensor(sensorId: Int, isOn: Boolean, onComplete: () -> Unit, onError: () -> Unit) {

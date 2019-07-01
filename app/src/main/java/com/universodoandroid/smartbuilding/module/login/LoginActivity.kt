@@ -8,14 +8,15 @@ import com.universodoandroid.smartbuilding.R
 import com.universodoandroid.smartbuilding.databinding.ActivityLoginBinding
 import com.universodoandroid.smartbuilding.domain.User
 import com.universodoandroid.smartbuilding.local.Session
-import com.universodoandroid.smartbuilding.module.menu.ApartmentActivity
+import com.universodoandroid.smartbuilding.module.apartments.ApartmentActivity
 import com.universodoandroid.smartbuilding.remote.api.InjectionApiDataSourceMain
 
-class LoginView : AppCompatActivity(), LoginHandler, LoginContract.View {
+class LoginActivity : AppCompatActivity(), LoginHandler, LoginContract.View {
 
-    private var binding: ActivityLoginBinding? = null
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var session: Session
+
     private var presenter: LoginPresenter? = null
-    private var session: Session? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +24,8 @@ class LoginView : AppCompatActivity(), LoginHandler, LoginContract.View {
 
         session = Session(this)
         presenter = LoginPresenter(this, InjectionApiDataSourceMain.provideAuthApiDataSource())
+
+        finishActivityIfNeeded()
     }
 
     override fun auth(user: User) {
@@ -31,12 +34,12 @@ class LoginView : AppCompatActivity(), LoginHandler, LoginContract.View {
 
     private fun initBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-        binding?.handler = this
-        binding?.user = User()
+        binding.handler = this
+        binding.user = User()
     }
 
     override fun saveToken(token: String) {
-        session?.saveStateLoginSuccess(token)
+        session.saveStateLoginSuccess(token)
         redirectToMenu()
     }
 
@@ -46,6 +49,15 @@ class LoginView : AppCompatActivity(), LoginHandler, LoginContract.View {
 
     private fun redirectToMenu() {
         startActivity(Intent(this, ApartmentActivity::class.java))
+        finish()
+    }
+
+    private fun finishActivityIfNeeded() {
+        val isLoggedIn = session.isLoggedIn()?: false
+
+        if (isLoggedIn) {
+            finish()
+        }
     }
 
 }

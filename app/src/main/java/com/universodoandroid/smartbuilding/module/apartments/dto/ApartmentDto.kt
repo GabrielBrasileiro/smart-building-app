@@ -1,4 +1,4 @@
-package com.universodoandroid.smartbuilding.module.menu.dto
+package com.universodoandroid.smartbuilding.module.apartments.dto
 
 data class ApartmentDto(
     val id: Int,

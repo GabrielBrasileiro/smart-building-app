@@ -1,4 +1,4 @@
-package com.universodoandroid.smartbuilding.module.menu
+package com.universodoandroid.smartbuilding.module.apartments
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.universodoandroid.smartbuilding.R
 import com.universodoandroid.smartbuilding.databinding.ApartmentItemBinding
-import com.universodoandroid.smartbuilding.module.menu.dto.ApartmentDto
+import com.universodoandroid.smartbuilding.module.apartments.dto.ApartmentDto
 
 class ApartmentAdapter(private val apartments: List<ApartmentDto>, private val onClick: (Int) -> Unit) :
         RecyclerView.Adapter<ApartmentAdapter.ViewHolder>() {

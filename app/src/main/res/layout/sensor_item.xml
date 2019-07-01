@@ -7,7 +7,7 @@
 
         <variable
             name="sensor"
-            type="com.universodoandroid.smartbuilding.module.menu.dto.SensorDto" />
+            type="com.universodoandroid.smartbuilding.module.sensors.dto.SensorDto" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -49,6 +49,7 @@
                 android:id="@+id/progress_bar"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+                android:layout_marginEnd="8dp"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

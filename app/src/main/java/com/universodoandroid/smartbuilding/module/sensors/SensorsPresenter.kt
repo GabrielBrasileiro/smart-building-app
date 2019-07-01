@@ -1,9 +1,9 @@
-package com.universodoandroid.smartbuilding.module.menu.dialogs
+package com.universodoandroid.smartbuilding.module.sensors
 
 import android.annotation.SuppressLint
 import com.universodoandroid.smartbuilding.domain.Sensor
 import com.universodoandroid.smartbuilding.extensions.toBool
-import com.universodoandroid.smartbuilding.module.menu.dto.SensorDto
+import com.universodoandroid.smartbuilding.module.sensors.dto.SensorDto
 import com.universodoandroid.smartbuilding.remote.services.ApartmentApiDataSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

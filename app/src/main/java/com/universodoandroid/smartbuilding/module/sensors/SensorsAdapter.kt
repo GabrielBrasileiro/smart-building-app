@@ -1,4 +1,4 @@
-package com.universodoandroid.smartbuilding.module.menu.dialogs
+package com.universodoandroid.smartbuilding.module.sensors
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.universodoandroid.smartbuilding.R
 import com.universodoandroid.smartbuilding.databinding.SensorItemBinding
-import com.universodoandroid.smartbuilding.module.menu.dto.SensorDto
+import com.universodoandroid.smartbuilding.module.sensors.dto.SensorDto
 
 class SensorsAdapter(private val sensors: List<SensorDto>,
                      private val onChange: (Int, Boolean, onComplete: () -> Unit, onError: () -> Unit) -> Unit) :
