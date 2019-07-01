@@ -7,8 +7,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 @SuppressLint("CheckResult")
-class LoginPresenter(private val view: LoginContract.View,
-                     private val authApiDataSource: AuthApiDataSource) {
+class LoginPresenter(
+    private val view: LoginContract.View,
+    private val authApiDataSource: AuthApiDataSource
+) {
 
     fun login(user: User) {
         authApiDataSource.getToken(user)

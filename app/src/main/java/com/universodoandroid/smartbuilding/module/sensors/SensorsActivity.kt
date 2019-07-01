@@ -1,6 +1,5 @@
 package com.universodoandroid.smartbuilding.module.sensors
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View

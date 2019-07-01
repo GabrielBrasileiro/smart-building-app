@@ -16,8 +16,8 @@ class SmartBuildingApplication : Application() {
         super.onCreate()
         session = Session(applicationContext)
 
-        session?.isLoggedIn()?.let { isLoggedIn ->
-            if (isLoggedIn) {
+        session?.let { session ->
+            if (session.isLoggedIn()) {
                 val intent = Intent(applicationContext, ApartmentActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)

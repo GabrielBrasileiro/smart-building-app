@@ -2,6 +2,7 @@ package com.universodoandroid.smartbuilding.module.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.universodoandroid.smartbuilding.R
@@ -44,6 +45,7 @@ class LoginActivity : AppCompatActivity(), LoginHandler, LoginContract.View {
     }
 
     override fun onError(error: String) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
         print(error)
     }
 
@@ -53,9 +55,7 @@ class LoginActivity : AppCompatActivity(), LoginHandler, LoginContract.View {
     }
 
     private fun finishActivityIfNeeded() {
-        val isLoggedIn = session.isLoggedIn()?: false
-
-        if (isLoggedIn) {
+        if (session.isLoggedIn()) {
             finish()
         }
     }

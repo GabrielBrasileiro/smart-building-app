@@ -26,13 +26,12 @@ class Session(private val context: Context) {
     }
 
     fun deleteStateLogin() {
-        sharedPreferencesEditor.putString(keyToken, null)
         sharedPreferencesEditor.clear()
         sharedPreferencesEditor.apply()
     }
 
-    fun isLoggedIn(): Boolean? {
-        return sharedPreferencesSetup.getString(keyToken, null)?.isNotEmpty()
+    fun isLoggedIn(): Boolean {
+        return sharedPreferencesSetup.getString(keyToken, null)?.isNotEmpty()?: false
     }
 
     fun getToken(): String? {
