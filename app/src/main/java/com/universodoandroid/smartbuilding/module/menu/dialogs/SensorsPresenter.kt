@@ -9,8 +9,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 @SuppressLint("CheckResult")
-class SensorsDialogPresenter(private val view: SensorsDialogContract.View,
-                             private val apartmentApiDataSource: ApartmentApiDataSource) {
+class SensorsPresenter(private val view: SensorsContract.View,
+                       private val apartmentApiDataSource: ApartmentApiDataSource) {
 
     fun getSensors(apartmentId: String) {
         apartmentApiDataSource.getApartment(id = apartmentId)
@@ -26,8 +26,15 @@ class SensorsDialogPresenter(private val view: SensorsDialogContract.View,
                 }
     }
 
-    fun updateSensor(id: Int, sensor: Sensor) {
+    fun updateSensor(id: Int, sensor: Sensor, onSuccess: (String) -> Unit, onError: (String) -> Unit) {
         apartmentApiDataSource.updateSensor(id.toString(), sensor)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    onSuccess(it)
+                }) {
+                    onError(it.localizedMessage)
+                }
     }
 
 }

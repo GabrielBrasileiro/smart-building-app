@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Smart Building</string>
+    <string name="control_title">Controle</string>
 </resources>

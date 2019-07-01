@@ -2,7 +2,6 @@ package com.universodoandroid.smartbuilding.module.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.universodoandroid.smartbuilding.R
@@ -12,7 +11,7 @@ import com.universodoandroid.smartbuilding.local.Session
 import com.universodoandroid.smartbuilding.module.menu.ApartmentActivity
 import com.universodoandroid.smartbuilding.remote.api.InjectionApiDataSourceMain
 
-class LoginActivity : AppCompatActivity(), LoginHandler, LoginContract.Activity {
+class LoginView : AppCompatActivity(), LoginHandler, LoginContract.View {
 
     private var binding: ActivityLoginBinding? = null
     private var presenter: LoginPresenter? = null

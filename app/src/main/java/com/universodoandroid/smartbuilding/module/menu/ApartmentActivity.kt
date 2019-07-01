@@ -1,6 +1,8 @@
 package com.universodoandroid.smartbuilding.module.menu
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -9,11 +11,11 @@ import com.universodoandroid.smartbuilding.Constants
 import com.universodoandroid.smartbuilding.R
 import com.universodoandroid.smartbuilding.databinding.ActivityMenuBinding
 import com.universodoandroid.smartbuilding.extensions.numberOfColumns
-import com.universodoandroid.smartbuilding.module.menu.dialogs.SensorsDialogFragment
+import com.universodoandroid.smartbuilding.module.menu.dialogs.SensorsActivity
 import com.universodoandroid.smartbuilding.module.menu.dto.ApartmentDto
 import com.universodoandroid.smartbuilding.remote.api.InjectionApiDataSourceMain
 
-class ApartmentActivity : AppCompatActivity(), ApartmentContract.Activity {
+class ApartmentActivity : AppCompatActivity(), ApartmentContract.View {
 
     private var presenter: ApartmentPresenter? = null
     private var binding: ActivityMenuBinding? = null
@@ -36,18 +38,22 @@ class ApartmentActivity : AppCompatActivity(), ApartmentContract.Activity {
     }
 
     private fun showControlDialog(id: Int) {
-        val bundle = Bundle().apply {
-            putString(Constants.APARTMENT_ID_KEY, id.toString())
-        }
+        val intent = Intent(this, SensorsActivity::class.java)
+        intent.putExtra(Constants.APARTMENT_ID_KEY, id)
 
-        val sensorsDialog = SensorsDialogFragment()
-        sensorsDialog.arguments = bundle
-
-        sensorsDialog.show(supportFragmentManager, sensorsDialog.tag)
+        startActivity(intent)
     }
 
     override fun showError(error: String) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showLoader() {
+        binding?.progressBar?.visibility = View.VISIBLE
+    }
+
+    override fun dismissLoader() {
+        binding?.progressBar?.visibility = View.GONE
     }
 
 }

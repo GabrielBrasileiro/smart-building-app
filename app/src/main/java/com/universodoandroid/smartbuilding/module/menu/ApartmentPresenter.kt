@@ -7,19 +7,22 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 @SuppressLint("CheckResult")
-class ApartmentPresenter(private val activity: ApartmentContract.Activity,
+class ApartmentPresenter(private val view: ApartmentContract.View,
                          private val apartmentApiDataSource: ApartmentApiDataSource) {
 
     fun getApartments() {
+        view.showLoader()
         apartmentApiDataSource.getApartments()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    activity.showApartments(it.map { apartmentResponse ->
+                    view.showApartments(it.map { apartmentResponse ->
                         ApartmentDto(apartmentResponse.id, apartmentResponse.number)
                     })
+                    view.dismissLoader()
                 }) {
-                    activity.showError(it.localizedMessage)
+                    view.showError(it.localizedMessage)
+                    view.dismissLoader()
                 }
     }
 

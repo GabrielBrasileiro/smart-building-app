@@ -1,7 +1,7 @@
 package com.universodoandroid.smartbuilding.module.login
 
 interface LoginContract {
-    interface Activity {
+    interface View {
         fun saveToken(token: String)
         fun onError(error: String)
     }
